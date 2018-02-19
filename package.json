@@ -5,7 +5,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod",
+    "prebuild": "rm -rf functions/lib && npm run build --prefix ./functions/",
+    "build": "run-s build:client build:aot",
+    "postbuild": "mv -f dist/index.html functions/lib && cp -rf functions/dist-server functions/lib",
+    "build:client": "ng build --prod --build-optimizer --extract-css --app 0",
+    "build:aot": "ng build --prod --output-hashing=false --extract-css --app 1",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -20,8 +24,10 @@
     "@angular/http": "^5.2.0",
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
+    "@angular/platform-server": "^5.2.5",
     "@angular/router": "^5.2.0",
     "core-js": "^2.4.1",
+    "express": "^4.16.2",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
   },
@@ -40,9 +46,12 @@
     "karma-coverage-istanbul-reporter": "^1.2.1",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "npm-run-all": "^4.1.2",
     "protractor": "~5.1.2",
+    "ts-loader": "^3.5.0",
     "ts-node": "~4.1.0",
     "tslint": "~5.9.1",
-    "typescript": "~2.5.3"
+    "typescript": "~2.5.3",
+    "webpack-node-externals": "^1.6.0"
   }
 }
