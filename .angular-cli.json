@@ -19,7 +19,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
@@ -29,16 +29,19 @@
       }
     },
     {
-      "platform": "server",
       "root": "src",
       "outDir": "functions/dist-server",
       "assets": [],
+      "platform": "server",
       "index": "index.html",
       "main": "main.server.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.server.json",
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
+      "styles": [
+        "styles.scss"
+      ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
@@ -72,7 +75,8 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
-    "component": {}
+    "styleExt": "scss",
+    "component": {
+    }
   }
 }
