@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
 
 @Component({
-    selector: 'app-root',
-    template: `
-        <router-outlet></router-outlet>
-    `
+    selector: 'app-home-component',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss']
 })
-export class AppComponent {
+export class HomeComponent {
     title = 'Realtime MBTA tracker for the greater Boston area bus, subway and commuter rail';
 
     constructor(private meta: Meta) {
