@@ -8,11 +8,12 @@
     "prebuild": "rm -rf functions/lib && npm run build --prefix ./functions/",
     "build": "run-s build:client build:aot",
     "postbuild": "cp -f dist/index.html functions/lib && mkdir dist/app && mv -f dist/index.html dist/app/ && cp -rf functions/dist-server functions/lib",
-    "build:client": "ng build --prod --build-optimizer --extract-css --app 0",
-    "build:aot": "ng build --prod --output-hashing=false --extract-css --app 1",
+    "build:client": "ng build --prod --build-optimizer --extract-css=true --app 0",
+    "build:aot": "ng build --prod --output-hashing=false --extract-css=true --app 1",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "npm run build && firebase deploy --only=functions,hosting"
   },
   "private": true,
   "dependencies": {

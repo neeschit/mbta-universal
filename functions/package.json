@@ -1,6 +1,7 @@
 {
   "name": "functions",
   "scripts": {
+    "prebuild": "npm i",
     "build": "./node_modules/.bin/tsc",
     "serve": "npm run build && firebase serve --only functions",
     "shell": "npm run build && firebase experimental:functions:shell",
@@ -23,6 +24,8 @@
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/platform-server": "^5.2.5",
     "@angular/router": "^5.2.0",
+    "@angular/service-worker": "^5.2.6",
+    "bulma": "^0.6.2",
     "core-js": "^2.4.1",
     "express": "^4.16.2",
     "rxjs": "^5.5.6",
