@@ -1,20 +1,13 @@
-<section class="hero is-info">
-    <div class="hero-body">
-        <div class="container">
-            <p class="title">Realtime tracking for the MBTA Bus, Subway and Commuter Rail public transports</p>
-        </div>
-    </div>
-</section>
 <section class="section">
     <ul class="tile is-ancestor">
         <li class="tile is-parent level-item">
-            <a class="is-3 box">Subway</a>
+            <a (click)="loadRouteType('subway')" class="is-3 box">Subway</a>
         </li>
         <li class="tile is-parent level-item">
-            <a class="is-3 box">Bus</a>
+            <a (click)="loadRouteType('bus')" class="is-3 box">Bus</a>
         </li>
         <li class="tile is-parent level-item">
-            <a class="is-3 box">Commuter Rail</a>
+            <a (click)="loadRouteType('commuter')" class="is-3 box">Commuter Rail</a>
         </li>
     </ul>
 </section>

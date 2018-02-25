@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
+import { RouteType } from '../route';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-home-component',
@@ -9,7 +11,7 @@ import { Meta } from '@angular/platform-browser';
 export class HomeComponent {
     title = 'Realtime MBTA tracker for the greater Boston area bus, subway and commuter rail';
 
-    constructor(private meta: Meta) {
+    constructor(private meta: Meta, private router: Router) {
         this.meta.addTag({
             name: 'description',
             content: 'Realtime MBTA tracker for the greater Boston area bus, subway and commuter rail'
@@ -19,5 +21,17 @@ export class HomeComponent {
             name: 'keywords',
             content: 'MBTA, Tracker, Boston, Bus, Subway, Commuter, Rail'
         });
+    }
+
+    loadRouteType(routeType: string) {
+        let routeEnum = RouteType.Heavy_Rail;
+
+        if (routeType.toLowerCase() === 'bus') {
+            routeEnum = RouteType.Bus;
+        } else if (routeType.toLowerCase() === 'commuter') {
+            routeEnum = RouteType.Commuter_Rail;
+        }
+
+        this.router.navigate(['/route/' + routeEnum]);
     }
 }

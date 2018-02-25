@@ -4,6 +4,13 @@ import { Meta } from '@angular/platform-browser';
 @Component({
     selector: 'app-root',
     template: `
+        <section class="hero is-info">
+            <div class="hero-body">
+                <div class="container">
+                    <p class="title">Realtime tracking for the MBTA Bus, Subway and Commuter Rail public transports</p>
+                </div>
+            </div>
+        </section>
         <router-outlet></router-outlet>
     `
 })

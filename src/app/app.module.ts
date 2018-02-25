@@ -5,7 +5,7 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { ROUTES, COMPONENTS } from './index';
 import { Router, RouterModule } from '@angular/router';
-import { HomeComponent } from './home/index';
+import { HomeComponent } from './home';
 
 @NgModule({
     declarations: [AppComponent, COMPONENTS],
