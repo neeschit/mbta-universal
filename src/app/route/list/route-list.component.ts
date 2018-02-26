@@ -1,16 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { MbtaHttpClient } from '../../misc/index';
 
 @Component({
     selector: 'app-route-list',
     templateUrl: './route-list.component.html',
     styleUrls: ['./route-list.component.scss']
 })
-export class RouteListComponent {
+export class RouteListComponent implements OnInit {
     routes: string[];
 
-    constructor() {
+    constructor(private http: MbtaHttpClient, private route: ActivatedRoute) {
         this.routes = ['test', 'test'];
+    }
+
+    ngOnInit(): void {
+        this.http.get('routes').subscribe({
+            next: response => {
+                console.log(response);
+            },
+            error: error => {
+                console.error(error);
+            }
+        });
     }
 }
