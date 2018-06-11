@@ -1,10 +1,12 @@
 import { HomeComponent } from './home';
-import { PageNotFoundComponent, MbtaHttpClient } from './misc';
+import { ApiClient } from './api/api.client';
+import { PageNotFoundComponent } from './api/index';
 import { RouteListComponent } from './route';
+import { StopListComponent } from './route/stop/stop-list.component';
 
-export const COMPONENTS = [HomeComponent, PageNotFoundComponent, RouteListComponent];
+export const COMPONENTS = [HomeComponent, PageNotFoundComponent, RouteListComponent, StopListComponent];
 
-export const PROVIDERS = [MbtaHttpClient];
+export const PROVIDERS = [ApiClient];
 
 export const ROUTES = [
     {
@@ -14,6 +16,10 @@ export const ROUTES = [
     {
         path: 'route/:routeType',
         component: RouteListComponent
+    },
+    {
+        path: 'route/:routeType/:routeId',
+        component: StopListComponent
     },
     {
         path: '**',

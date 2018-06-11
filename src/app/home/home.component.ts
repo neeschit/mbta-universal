@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
-import { RouteType } from '../route';
+import { ROUTE_DISPLAY_MAP } from '../route';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,19 +19,11 @@ export class HomeComponent {
         this.meta.addTag({ name: 'author', content: 'nischit.burnz@gmail.com' });
         this.meta.addTag({
             name: 'keywords',
-            content: 'MBTA, Tracker, Boston, Bus, Subway, Commuter, Rail'
+            content: 'MBTA, Tracker, Boston, Bus, Subway, Commuter, Rail, Train, Tram'
         });
     }
 
     loadRouteType(routeType: string) {
-        let routeEnum = RouteType.Heavy_Rail;
-
-        if (routeType.toLowerCase() === 'bus') {
-            routeEnum = RouteType.Bus;
-        } else if (routeType.toLowerCase() === 'commuter') {
-            routeEnum = RouteType.Commuter_Rail;
-        }
-
-        this.router.navigate(['/route/' + routeEnum]);
+        this.router.navigate(['/route/' + routeType]);
     }
 }

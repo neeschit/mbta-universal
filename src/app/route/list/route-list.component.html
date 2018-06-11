@@ -1,7 +1,7 @@
 <section class="section">
     <ul class="columns is-multiline">
         <li *ngFor="let route of routes" class="column box is-4 is-offset-4 has-text-centered">
-            <a>{{route}}</a>
+            <a (click)="loadStops(route)">{{route.attributes.long_name || route.attributes.short_name}}</a>
         </li>
     </ul>
 </section>

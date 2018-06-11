@@ -1,4 +1,6 @@
 import * as angularUniversal from 'angular-universal-express-firebase';
+import { apiExpressApp } from './api';
+import { https } from 'firebase-functions';
 
 export let ssr = angularUniversal.trigger({
     index: __dirname + '/index.html',
@@ -7,3 +9,5 @@ export let ssr = angularUniversal.trigger({
     cdnCacheExpiry: 60,
     browserCacheExpiry: 30
 });
+
+export let api = https.onRequest(apiExpressApp);

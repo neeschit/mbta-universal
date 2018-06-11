@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MbtaHttpClient } from '../../misc/index';
+import { ApiClient, Route } from '../../api';
+import { RouteType } from '../route-type.model';
 
 @Component({
     selector: 'app-route-list',
@@ -9,20 +10,30 @@ import { MbtaHttpClient } from '../../misc/index';
     styleUrls: ['./route-list.component.scss']
 })
 export class RouteListComponent implements OnInit {
-    routes: string[];
+    routes: Route[];
 
-    constructor(private http: MbtaHttpClient, private route: ActivatedRoute) {
-        this.routes = ['test', 'test'];
-    }
+    private routeParams: string;
+
+    constructor(private http: ApiClient, private route: ActivatedRoute, private router: Router) {}
 
     ngOnInit(): void {
-        this.http.get('routes').subscribe({
-            next: response => {
-                console.log(response);
-            },
-            error: error => {
-                console.error(error);
-            }
+        this.route.params.subscribe((routeParams: any) => {
+            const routeType = routeParams.routeType;
+
+            this.routeParams = routeType;
+
+            this.http.getRoutes(routeType).subscribe({
+                next: (response: any) => {
+                    this.routes = response;
+                },
+                error: error => {
+                    console.error(error);
+                }
+            });
         });
+    }
+
+    loadStops(route: Route) {
+        this.router.navigateByUrl(`/route/${this.routeParams}/${route.id}`);
     }
 }
