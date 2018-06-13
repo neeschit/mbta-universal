@@ -36,6 +36,9 @@ functions/node_modules
 npm-debug.log
 testem.log
 /typings
+src/assets/apiConfig.json
+apiConfig.json
+functions/**/apiConfig.json
 
 # e2e
 /e2e/*.js
