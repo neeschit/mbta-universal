@@ -26,11 +26,16 @@ export class MbtaHttpClient {
         });
     }
 
-    async getPredictions(queryFilters: { stopId: string; routeId: string }) {
-        return this._get('predictions', {
-            stop: queryFilters.stopId,
-            route: queryFilters.routeId
-        });
+    async getPredictions(queryFilters: { stopId: string; routeId: string; include?: string }) {
+        return this._get(
+            'predictions',
+            {
+                stop: queryFilters.stopId,
+                route: queryFilters.routeId,
+                include: queryFilters.include
+            },
+            'departure_time,arrival_time'
+        );
     }
 
     async getTrips(...tripIds: string[]) {
@@ -39,12 +44,12 @@ export class MbtaHttpClient {
         });
     }
 
-    private async _get(path: string, filter?: any) {
+    private async _get(path: string, filter?: any, sort?: any) {
         const url = this.mbta.baseUrl + path;
 
         filter = filter || {};
 
-        const filters = Object.keys(filter).reduce((queryString: string, key: string, index: number) => {
+        let filters = Object.keys(filter).reduce((queryString: string, key: string, index: number) => {
             if (!filter[key]) {
                 return queryString;
             }
@@ -58,6 +63,11 @@ export class MbtaHttpClient {
 
             return queryString;
         }, '');
+
+        if (sort) {
+            const sortString = 'sort=' + sort;
+            filters += filters.length ? '&' + sortString : sortString;
+        }
 
         console.log(filters);
 

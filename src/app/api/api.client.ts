@@ -4,7 +4,8 @@ import 'rxjs/add/operator/map';
 import { RouteType, ROUTE_DISPLAY_MAP } from '../route/route-type.model';
 import { Route, Stop } from './api.interfaces';
 
-const apiURL = ('http://localhost:5000/mbta-universal/us-central1' || 'https://us-central1-mbta-universal.cloudfunctions.net') + '/api';
+const apiURL =
+    /* 'http://localhost:5000/mbta-universal/us-central1' */ ('' || 'https://us-central1-mbta-universal.cloudfunctions.net') + '/api';
 
 @Injectable()
 export class ApiClient {
@@ -54,7 +55,7 @@ export class ApiClient {
             });
     }
 
-    getStopPredictions(request: { stopId: string; routeId: string }) {
+    getStopPredictions(request: { stopId: string; routeId: string; include?: string }) {
         return this.http.get(apiURL + '/predictions', {
             params: request
         });
