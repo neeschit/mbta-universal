@@ -11,11 +11,14 @@ import { RouteType } from '../route-type.model';
 })
 export class StopListComponent implements OnInit {
     stops: Stop[];
-    constructor(private http: ApiClient, private route: ActivatedRoute) {}
+    routeId: string;
+    constructor(private http: ApiClient, private route: ActivatedRoute, private router: Router) {}
 
     ngOnInit(): void {
         this.route.params.subscribe((routeParams: any) => {
             const routeId = routeParams.routeId;
+            this.routeId = routeId;
+
             return this.http.getStops(routeId).subscribe({
                 next: (response: any) => {
                     this.stops = response;
@@ -28,13 +31,6 @@ export class StopListComponent implements OnInit {
     }
 
     loadStopPredictions(stopId: string) {
-        return this.http.getStopPredictions(stopId).subscribe({
-            next: (response: any) => {
-                this.stops = response;
-            },
-            error: error => {
-                console.error(error);
-            }
-        });
+        this.router.navigateByUrl(`/route/${this.routeId}/predictions/${stopId}`);
     }
 }

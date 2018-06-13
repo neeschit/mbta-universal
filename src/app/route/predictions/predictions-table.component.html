@@ -1,0 +1,19 @@
+<section class="section">
+    <div class="columns is-centered">
+        <div class="column is-5-mobile is-offset-5-mobile is-3 is-offset-3" *ngFor="let direction of directions">
+            <h2 class="subtitle">{{direction.direction_name}}</h2>
+            <table class="table is-striped">
+                <thead>
+                    <th>
+                        Arriving in
+                    </th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let prediction of direction.predictions">
+                        <td>predction.eta</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

@@ -14,13 +14,28 @@ export class MbtaHttpClient {
         };
     }
 
-    async getRoutes() {
-        return this._get('routes');
+    async getRoutes(routeId: string) {
+        return this._get('routes', {
+            id: routeId
+        });
     }
 
     async getStops(routeId: string) {
         return this._get('stops', {
             route: routeId
+        });
+    }
+
+    async getPredictions(queryFilters: { stopId: string; routeId: string }) {
+        return this._get('predictions', {
+            stop: queryFilters.stopId,
+            route: queryFilters.routeId
+        });
+    }
+
+    async getTrips(...tripIds: string[]) {
+        return this._get('trips', {
+            id: tripIds && tripIds.length && tripIds.join(',')
         });
     }
 
@@ -30,6 +45,9 @@ export class MbtaHttpClient {
         filter = filter || {};
 
         const filters = Object.keys(filter).reduce((queryString: string, key: string, index: number) => {
+            if (!filter[key]) {
+                return queryString;
+            }
             if (!index) {
                 queryString += '?';
             } else {
@@ -40,6 +58,8 @@ export class MbtaHttpClient {
 
             return queryString;
         }, '');
+
+        console.log(filters);
 
         return new Promise((resolve, reject) => {
             request.get(
@@ -56,7 +76,8 @@ export class MbtaHttpClient {
                     }
 
                     try {
-                        resolve(JSON.parse(body).data);
+                        const json = JSON.parse(body);
+                        resolve(json.data);
                     } catch (err) {
                         reject(err);
                     }

@@ -1,7 +1,8 @@
 <section class="section">
     <ul class="columns is-multiline">
-        <li *ngFor="let stop of stops" class="column box is-4 is-offset-4 has-text-centered">
-            <a (click)="loadStopPredictions(stop)">{{stop.attributes.name}}</a>
+        <li (click)="loadStopPredictions(stop.id)" *ngFor="let stop of stops" class="column box is-4 is-offset-4 has-text-centered"
+            style=cursor:pointer>
+            <a>{{stop.attributes.name}}</a>
         </li>
     </ul>
 </section>

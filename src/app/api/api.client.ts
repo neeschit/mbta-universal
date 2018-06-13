@@ -4,11 +4,12 @@ import 'rxjs/add/operator/map';
 import { RouteType, ROUTE_DISPLAY_MAP } from '../route/route-type.model';
 import { Route, Stop } from './api.interfaces';
 
-const apiURL = 'https://us-central1-mbta-universal.cloudfunctions.net/api';
+const apiURL = ('http://localhost:5000/mbta-universal/us-central1' || 'https://us-central1-mbta-universal.cloudfunctions.net') + '/api';
 
 @Injectable()
 export class ApiClient {
     constructor(private http: HttpClient) {}
+
     getRoutes(routeType: string) {
         const mappedRoutes = ROUTE_DISPLAY_MAP[routeType];
 
@@ -25,6 +26,20 @@ export class ApiClient {
         });
     }
 
+    getRoute(routeId: string) {
+        return this.http
+            .get(apiURL + '/routes', {
+                params: {
+                    route: routeId
+                }
+            })
+            .map((body: any) => {
+                const routes = body as Route[];
+
+                return routes;
+            });
+    }
+
     getStops(route: string) {
         return this.http
             .get(apiURL + '/stops', {
@@ -39,10 +54,16 @@ export class ApiClient {
             });
     }
 
-    getStopPredictions(stopId: string) {
+    getStopPredictions(request: { stopId: string; routeId: string }) {
         return this.http.get(apiURL + '/predictions', {
+            params: request
+        });
+    }
+
+    getTrips(...tripIds: string[]) {
+        return this.http.get(apiURL + '/trips', {
             params: {
-                stop: stopId
+                trips: tripIds
             }
         });
     }

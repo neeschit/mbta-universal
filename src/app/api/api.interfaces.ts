@@ -1,5 +1,10 @@
 import { RouteType } from '../route/route-type.model';
 
+export interface RouteDirection {
+    direction_id: any;
+    direction_name: string;
+}
+
 export interface Route extends BaseResponse {
     attributes: {
         type: RouteType;
