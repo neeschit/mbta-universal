@@ -6,7 +6,7 @@ export let ssr = angularUniversal.trigger({
     index: __dirname + '/index.html',
     main: __dirname + '/dist-server/main.bundle',
     enableProdMode: true,
-    cdnCacheExpiry: 60,
+    cdnCacheExpiry: 60 * 24 * 7,
     browserCacheExpiry: 30
 });
 
